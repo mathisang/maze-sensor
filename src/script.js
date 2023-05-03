@@ -8,11 +8,6 @@ const canvas = document.querySelector('canvas.webgl')
 
 let moveX = 0;
 let moveY = 0;
-// let moveZ = 0;
-
-// x : rotation
-// y : inclinaison gauche droite
-// z : inclinaison avant arrière
 
 if (window.DeviceOrientationEvent) {
     window.addEventListener(
@@ -20,7 +15,6 @@ if (window.DeviceOrientationEvent) {
         (event) => {
             moveX = event.gamma;
             moveY = event.beta;
-            //moveZ = event.beta;
         },
         true
     );
@@ -89,9 +83,9 @@ const controls = new OrbitControls(camera, canvas)
 //     }
 // );
 
-// Cube with shadow
+// Cube
 const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.BoxGeometry(1.5, 2, .4),
     new THREE.MeshStandardMaterial({
         color: '#ffffff'
     })

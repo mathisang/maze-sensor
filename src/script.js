@@ -18,8 +18,8 @@ if (window.DeviceOrientationEvent) {
     window.addEventListener(
         "deviceorientation",
         (event) => {
-            moveX = event.beta;
-            moveY = event.alpha;
+            moveX = event.gamma;
+            moveY = event.beta;
             //moveZ = event.beta;
         },
         true

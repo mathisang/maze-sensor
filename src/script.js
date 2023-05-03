@@ -10,6 +10,10 @@ const gx = document.querySelector('.gx');
 const gy = document.querySelector('.gy');
 const gz = document.querySelector('.gz');
 
+// x : rotation
+// y : inclinaison gauche droite
+// z : inclinaison avant arrière
+
 if (window.DeviceOrientationEvent) {
     window.addEventListener(
         "deviceorientation",
@@ -88,8 +92,6 @@ const cube = new THREE.Mesh(
 )
 cube.castShadow = true
 cube.receiveShadow = true
-cube.rotation.x = 0.5
-cube.rotation.y = 0.5
 scene.add(cube)
 
 // Ambient Light
@@ -115,6 +117,24 @@ const tick = () => {
 
     // Update controls
     // controls.update()
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener(
+            "deviceorientation",
+            (event) => {
+                cube.rotation.x = event.gamma / 100
+                cube.rotation.y = event.beta / 100
+                // cube.rotation.z = 0.
+                // gx.innerHTML = event.alpha;
+                // gy.innerHTML = event.gamma;
+                // gz.innerHTML = event.beta;
+            },
+            true
+        );
+    }
+
+    cube.rotation.x = event.gamma / 100
+    cube.rotation.y = 0.5
+    cube.rotation.z = 0.
 
     // Render
     renderer.render(scene, camera)

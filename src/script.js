@@ -18,9 +18,9 @@ if (window.DeviceOrientationEvent) {
     window.addEventListener(
         "deviceorientation",
         (event) => {
-            moveX = event.alpha;
-            moveY = event.gamma;
-            // moveZ = event.beta;
+            moveX = event.beta;
+            moveY = event.alpha;
+            //moveZ = event.beta;
         },
         true
     );

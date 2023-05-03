@@ -6,17 +6,17 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
-// const gx = document.querySelector('.gx');
-// const gy = document.querySelector('.gy');
-// const gz = document.querySelector('.gz');
+const gx = document.querySelector('.gx');
+const gy = document.querySelector('.gy');
+const gz = document.querySelector('.gz');
 
 if (window.DeviceOrientationEvent) {
     window.addEventListener(
         "deviceorientation",
         (event) => {
-            console.log('x : '+event.alpha);
-            console.log('y : '+event.gamma);
-            console.log('z : '+event.beta);
+            gx.innerHTML = event.alpha;
+            gy.innerHTML = event.gamma;
+            gz.innerHTML = event.beta;
         },
         true
     );
@@ -54,8 +54,8 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000)
-camera.position.x = 1
-camera.position.y = 1
+camera.position.x = 0
+camera.position.y = 0
 camera.position.z = 3
 scene.add(camera)
 
@@ -88,18 +88,20 @@ const cube = new THREE.Mesh(
 )
 cube.castShadow = true
 cube.receiveShadow = true
+cube.rotation.x = 0.5
+cube.rotation.y = 0.5
 scene.add(cube)
 
 // Ambient Light
-// const light = new THREE.AmbientLight("#ffffff");
-// light.intensity = 3;
-// scene.add(light);
+const light = new THREE.AmbientLight("#deaaaa");
+light.intensity = .3;
+scene.add(light);
 
 // Directional Light
-const directionalLight = new THREE.DirectionalLight('#ffffff', .9)
-directionalLight.position.x = -10
-directionalLight.position.y = 2
-directionalLight.position.z = 15
+const directionalLight = new THREE.DirectionalLight('#ffffff', .7)
+directionalLight.position.x = 2
+directionalLight.position.y = 5
+directionalLight.position.z = 3
 scene.add(directionalLight)
 
 // Animate

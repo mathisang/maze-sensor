@@ -18,14 +18,5 @@ body
     outline: none;
 }
 
-.coord {
-    position: absolute;
-    z-index: 99;
-}
 
-.coord p {
-    color: white;
-    font-weight: 700;
-    /*position: absolute;*/
-    /*z-index: 99;*/
-}
+/*# sourceMappingURL=main.css.map*/

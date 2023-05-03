@@ -6,9 +6,9 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
-const gx = document.querySelector('.gx');
-const gy = document.querySelector('.gy');
-const gz = document.querySelector('.gz');
+let moveX = 0;
+let moveY = 0;
+// let moveZ = 0;
 
 // x : rotation
 // y : inclinaison gauche droite
@@ -18,12 +18,18 @@ if (window.DeviceOrientationEvent) {
     window.addEventListener(
         "deviceorientation",
         (event) => {
-            gx.innerHTML = event.alpha;
-            gy.innerHTML = event.gamma;
-            gz.innerHTML = event.beta;
+            moveX = event.alpha;
+            moveY = event.gamma;
+            // moveZ = event.beta;
         },
         true
     );
+}
+else if (window.matchMedia('(hover: hover)').matches) {
+    window.addEventListener('mousemove', (event) => {
+        moveX = (event.clientX / sizes.width) * 60 - 30;
+        moveY = (event.clientY / sizes.height) * 60 - 30;
+    });
 }
 
 // Scene
@@ -117,24 +123,11 @@ const tick = () => {
 
     // Update controls
     // controls.update()
-    if (window.DeviceOrientationEvent) {
-        window.addEventListener(
-            "deviceorientation",
-            (event) => {
-                cube.rotation.x = event.gamma / 100
-                cube.rotation.y = event.beta / 100
-                // cube.rotation.z = 0.
-                // gx.innerHTML = event.alpha;
-                // gy.innerHTML = event.gamma;
-                // gz.innerHTML = event.beta;
-            },
-            true
-        );
-    }
+    // cube.rotation.x = moveY / 100
+    // cube.rotation.y = moveZ / 100
 
-    cube.rotation.x = event.gamma / 100
-    cube.rotation.y = 0.5
-    cube.rotation.z = 0.
+    cube.rotation.x = moveY / 100
+    cube.rotation.y = moveX / 100
 
     // Render
     renderer.render(scene, camera)

@@ -19,6 +19,13 @@ body
 }
 
 button {
-    position: absolute;
-    z-index: 99;
+    display: none;
+}
+
+@media only screen and (min-width : 500px) {
+    button {
+        display: block;
+        position: absolute;
+        z-index: 99;
+    }
 }

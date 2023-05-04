@@ -5,7 +5,6 @@ import {DataPoint} from './DataPoint.js'
 import * as THREE from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
-import {GUI} from 'dat.gui'
 
 import * as CANNON from 'cannon-es'
 import CannonDebugger from 'cannon-es-debugger'
@@ -18,12 +17,7 @@ let scene, renderer, canvas, sizes, moveX, moveY, maze, ball, floorBody, sphereB
 initThree()
 initCannon()
 initMovement()
-initDebugger()
-
-// document.getElementById('shake').onclick = function () {
-//     maze.visible = !maze.visible
-//     mazeBis.visible = !mazeBis.visible
-// }
+// initDebugger()
 
 // Mouse & Mobile orientation
 function initMovement() {
@@ -226,7 +220,7 @@ const updatePhysics = () => {
     world.step(1 / 60, deltaTime, 3)
 
     // Debugger cannon
-    cannonDebugger.update()
+    // cannonDebugger.update()
 
     // Update floor & maze
     let quaternionFloor = {x: new CANNON.Quaternion(), y: new CANNON.Quaternion()}

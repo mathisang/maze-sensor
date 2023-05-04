@@ -285,7 +285,7 @@ const updatePhysics = () => {
 
                 document.getElementById("test").innerText = tempDerivate
 
-                if(tempDerivate > 1000) {
+                if(tempDerivate > 300) {
                     changeMaze()
                 }
 

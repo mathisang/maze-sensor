@@ -177,7 +177,7 @@ function initCannon() {
         shape: sphereShape,
         material: plasticMaterial
     })
-    sphereBody.linearDamping = .6
+    sphereBody.linearDamping = .3
     world.addBody(sphereBody);
 
     // Floor physics
@@ -281,7 +281,7 @@ const updatePhysics = () => {
                 let derivate = 10.0 * (norm - oldData) / deltaTime;
                 oldData = norm
 
-                let tempDerivate = derivate / 10000000
+                let tempDerivate = derivate / 1000000
 
                 document.getElementById("test").innerText = tempDerivate
 

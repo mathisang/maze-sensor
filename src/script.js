@@ -276,7 +276,7 @@ const updatePhysics = () => {
                 let ay = event.acceleration.y
                 let az = event.acceleration.z
 
-                let oldData
+                let oldData = 0
                 let norm = Math.pow(Math.pow(100 * ax, 2) + Math.pow(100 * ay, 2) + Math.pow(100 * az, 2), 2)
                 let derivate = 10.0 * (norm - oldData) / deltaTime;
                 oldData = norm

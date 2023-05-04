@@ -30,16 +30,25 @@ function initMovement() {
     const gy = document.querySelector('.gy');
     const gz = document.querySelector('.gz');
 
+    if (window.DeviceMotionEvent) {
+        window.addEventListener(
+            "devicemotion",
+            (event) => {
+                gx.innerHTML = event.acceleration.x
+                gy.innerHTML = event.acceleration.y
+                gz.innerHTML = event.acceleration.z
+                ga.innerHTML = event.accelerationIncludingGravity.x
+            },
+            true
+        );
+    }
+
     if (window.DeviceOrientationEvent) {
         window.addEventListener(
             "deviceorientation",
             (event) => {
                 moveX.push(event.gamma)
                 moveY.push(event.beta)
-
-                gx.innerHTML = event.alpha;
-                gy.innerHTML = event.gamma;
-                gz.innerHTML = event.beta;
             },
             true
         );

@@ -280,7 +280,7 @@ const updatePhysics = () => {
                 let norm = Math.pow(Math.pow(100 * ax, 2) + Math.pow(100 * ay, 2) + Math.pow(100 * az, 2), 2)
                 let derivate = 10.0 * (norm - oldData) / deltaTime;
 
-                console.log(derivate)
+                alert(derivate)
 
                 // if((ax > 30 || ax < -30) || (ay > 30 || ay < -30) || (az > 30 || az < -30)) {
                 //     changeMaze()

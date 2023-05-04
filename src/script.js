@@ -36,7 +36,7 @@ function initMovement() {
                 let ay = event.acceleration.y
                 let az = event.acceleration.z
 
-                if((ax > 30 || ay > 30 || az > 30) && shakeEvent === false) {
+                if(((ax > 30 || ax < -30) || (ay > 30 || ay < -30) || (az > 30 || az < -30)) && shakeEvent === false) {
                     shakeEvent = true
                     alert('shaked')
 

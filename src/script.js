@@ -193,6 +193,7 @@ function initCannon() {
         shape: sphereShape,
         material: plasticMaterial
     })
+    sphereBody.linearDamping = .6
     world.addBody(sphereBody);
 
     // Floor physics

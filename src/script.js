@@ -11,7 +11,7 @@ import CannonDebugger from 'cannon-es-debugger'
 
 // Global variables
 let scene, renderer, canvas, sizes, moveX, moveY, maze, ball, floorBody, sphereBody, world, controls, camera,
-    cannonDebugger, clock = new THREE.Clock(), lastElapsedTime = 0, ballSize = .2, mazeBis
+    cannonDebugger, clock = new THREE.Clock(), lastElapsedTime = 0, ballSize = .2, mazeBis, shakeEvent = false
 
 // Init functions
 initThree()
@@ -19,13 +19,24 @@ initCannon()
 initMovement()
 // initDebugger()
 
+function changeMaze() {
+    if(shakeEvent === false) {
+        shakeEvent = true
+        maze.visible = !maze.visible
+        mazeBis.visible = !mazeBis.visible
+
+        setTimeout(function () {
+            shakeEvent = false
+        }, 3000);
+    }
+}
+
 // Mouse & Mobile orientation
 function initMovement() {
     moveX = new DataPoint();
     moveY = new DataPoint();
 
     // Shake detection
-    let shakeEvent = false;
     if (window.DeviceMotionEvent) {
         window.addEventListener(
             "devicemotion",
@@ -34,20 +45,17 @@ function initMovement() {
                 let ay = event.acceleration.y
                 let az = event.acceleration.z
 
-                if(((ax > 30 || ax < -30) || (ay > 30 || ay < -30) || (az > 30 || az < -30)) && shakeEvent === false) {
-                    shakeEvent = true
-                    maze.visible = !maze.visible
-                    mazeBis.visible = !mazeBis.visible
-
-                    setTimeout(function () {
-                        shakeEvent = false
-                    }, 3000);
+                if((ax > 30 || ax < -30) || (ay > 30 || ay < -30) || (az > 30 || az < -30)) {
+                    changeMaze()
                 }
             },
             true
         );
     }
-
+    // Manual shake detection
+    document.getElementById('shake').addEventListener('click', () => {
+        changeMaze()
+    })
     // Orientation detection
     if (window.DeviceOrientationEvent) {
         window.addEventListener(
@@ -187,7 +195,7 @@ function initCannon() {
     world.addBody(sphereBody);
 
     // Floor physics
-    const floorShape = new CANNON.Plane()
+    const floorShape = new CANNON.Box(new CANNON.Vec3(5, 5, 0.1))
     floorBody = new CANNON.Body()
     floorBody.mass = 0
     floorBody.addShape(floorShape)

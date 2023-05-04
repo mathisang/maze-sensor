@@ -19,6 +19,7 @@ initCannon()
 initMovement()
 // initDebugger()
 
+// Change maze
 function changeMaze() {
     if(shakeEvent === false) {
         shakeEvent = true
@@ -266,6 +267,20 @@ const updatePhysics = () => {
     // Update ball
     ball.position.copy(sphereBody.position);
     ball.quaternion.copy(sphereBody.quaternion);
+
+    // Reset ball
+    if(sphereBody.position.y < -10) {
+        sphereBody.position.y = 1
+        sphereBody.position.x = 0
+        sphereBody.position.z = 0
+
+        sphereBody.velocity.x = 0
+        sphereBody.velocity.y = 0
+        sphereBody.velocity.z = 0
+        sphereBody.angularVelocity.x = 0
+        sphereBody.angularVelocity.y = 0
+        sphereBody.angularVelocity.z = 0
+    }
 
     // Render
     renderer.render(scene, camera)

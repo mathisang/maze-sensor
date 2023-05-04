@@ -283,6 +283,8 @@ const updatePhysics = () => {
 
                 alert(derivate)
 
+                document.getElementById("test").innerText = derivate
+
                 // if((ax > 30 || ax < -30) || (ay > 30 || ay < -30) || (az > 30 || az < -30)) {
                 //     changeMaze()
                 // }

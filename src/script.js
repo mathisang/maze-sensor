@@ -37,22 +37,6 @@ function initMovement() {
     moveX = new DataPoint();
     moveY = new DataPoint();
 
-    // Shake detection
-    if (window.DeviceMotionEvent) {
-        window.addEventListener(
-            "devicemotion",
-            (event) => {
-                let ax = event.acceleration.x
-                let ay = event.acceleration.y
-                let az = event.acceleration.z
-
-                if((ax > 30 || ax < -30) || (ay > 30 || ay < -30) || (az > 30 || az < -30)) {
-                    changeMaze()
-                }
-            },
-            true
-        );
-    }
     // Manual shake detection
     document.getElementById('shake').addEventListener('click', () => {
         changeMaze()
@@ -281,6 +265,29 @@ const updatePhysics = () => {
         sphereBody.angularVelocity.x = 0
         sphereBody.angularVelocity.y = 0
         sphereBody.angularVelocity.z = 0
+    }
+
+    // Shake detection
+    if (window.DeviceMotionEvent) {
+        window.addEventListener(
+            "devicemotion",
+            (event) => {
+                let ax = event.acceleration.x
+                let ay = event.acceleration.y
+                let az = event.acceleration.z
+
+                let oldData
+                let norm = Math.pow(Math.pow(100 * ax, 2) + Math.pow(100 * ay, 2) + Math.pow(100 * az, 2), 2)
+                let derivate = 10.0 * (norm - oldData) / deltaTime;
+
+                console.log(derivate)
+
+                // if((ax > 30 || ax < -30) || (ay > 30 || ay < -30) || (az > 30 || az < -30)) {
+                //     changeMaze()
+                // }
+            },
+            true
+        );
     }
 
     // Render

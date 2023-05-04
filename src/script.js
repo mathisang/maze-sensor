@@ -26,19 +26,25 @@ function initMovement() {
     moveX = new DataPoint();
     moveY = new DataPoint();
 
-    const gx = document.querySelector('.gx');
-    const gy = document.querySelector('.gy');
-    const gz = document.querySelector('.gz');
-    const ga = document.querySelector('.ga');
+    let shakeEvent = false;
 
     if (window.DeviceMotionEvent) {
         window.addEventListener(
             "devicemotion",
             (event) => {
-                gx.innerHTML = event.acceleration.x
-                gy.innerHTML = event.acceleration.y
-                gz.innerHTML = event.acceleration.z
-                ga.innerHTML = event.accelerationIncludingGravity.x
+                let ax = event.acceleration.x
+                let ay = event.acceleration.y
+                let az = event.acceleration.z
+
+                if((ax > 10 || ay > 10 || az > 10) && shakeEvent === false) {
+                    shakeEvent = true
+                    alert('shaked')
+
+                    setTimeout(function () {
+                        shakeEvent = false
+                        alert('ready')
+                    }, 3000);
+                }
             },
             true
         );

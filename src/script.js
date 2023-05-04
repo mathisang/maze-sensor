@@ -9,14 +9,16 @@ import {GUI} from 'dat.gui'
 
 import * as CANNON from 'cannon-es'
 import CannonDebugger from 'cannon-es-debugger'
+import { threeToCannon, ShapeType } from 'three-to-cannon';
 
 // Global variables
-let scene, renderer, canvas, sizes, moveX, moveY, maze, ball, floorBody, sphereBody, world, controls, camera, cannonDebugger, clock = new THREE.Clock(), lastElapsedTime = 0
+let scene, renderer, canvas, sizes, moveX, moveY, maze, ball, floorBody, sphereBody, world, controls, camera,
+    cannonDebugger, clock = new THREE.Clock(), lastElapsedTime = 0, ballSize = .2
 
 // Init functions
 initMovement()
-initThree()
 initCannon()
+initThree()
 initDebugger()
 
 // Mouse & Mobile orientation
@@ -24,12 +26,20 @@ function initMovement() {
     moveX = new DataPoint();
     moveY = new DataPoint();
 
+    const gx = document.querySelector('.gx');
+    const gy = document.querySelector('.gy');
+    const gz = document.querySelector('.gz');
+
     if (window.DeviceOrientationEvent) {
         window.addEventListener(
             "deviceorientation",
             (event) => {
                 moveX.push(event.gamma)
                 moveY.push(event.beta)
+
+                gx.innerHTML = event.alpha;
+                gy.innerHTML = event.gamma;
+                gz.innerHTML = event.beta;
             },
             true
         );
@@ -111,12 +121,19 @@ function initThree() {
             maze.position.y = .5
             // maze.rotation.y = Math.PI / 2
             scene.add(maze)
+
+            // if(maze) {
+            // console.log('loaded')
+            // const result = threeToCannon(maze)
+            // const {rshape, roffset, rquaternion} = result
+            // world.addBody(result)
+            // }
         }
     )
 
     // Ball
     ball = new THREE.Mesh(
-        new THREE.SphereGeometry(.5, 20, 20),
+        new THREE.SphereGeometry(ballSize, 20, 20),
         new THREE.MeshStandardMaterial({
             color: '#1d6899'
         })
@@ -137,9 +154,9 @@ function initCannon() {
     const plasticMaterial = new CANNON.Material('plastic')
 
     // Ball physics
-    const sphereShape = new CANNON.Sphere(0.5)
+    const sphereShape = new CANNON.Sphere(ballSize)
     sphereBody = new CANNON.Body({
-        mass: 10,
+        mass: 2,
         position: new CANNON.Vec3(0, .5, 0),
         shape: sphereShape,
         material: plasticMaterial
@@ -165,6 +182,10 @@ function initCannon() {
         }
     )
     world.addContactMaterial(concretePlasticContactMaterial)
+}
+
+function initThreeToCannon() {
+
 }
 
 function initDebugger() {

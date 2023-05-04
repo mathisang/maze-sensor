@@ -12,17 +12,18 @@ import CannonDebugger from 'cannon-es-debugger'
 
 // Global variables
 let scene, renderer, canvas, sizes, moveX, moveY, maze, ball, floorBody, sphereBody, world, controls, camera,
-    cannonDebugger, clock = new THREE.Clock(), lastElapsedTime = 0, ballSize = .2
+    cannonDebugger, clock = new THREE.Clock(), lastElapsedTime = 0, ballSize = .2, mazeBis
 
 // Init functions
-initMovement()
-initCannon()
 initThree()
+initCannon()
+initMovement()
 initDebugger()
 
-document.getElementById('shake').onclick = function () {
-    alert('shaked')
-}
+// document.getElementById('shake').onclick = function () {
+//     maze.visible = !maze.visible
+//     mazeBis.visible = !mazeBis.visible
+// }
 
 // Mouse & Mobile orientation
 function initMovement() {
@@ -41,7 +42,8 @@ function initMovement() {
 
                 if(((ax > 30 || ax < -30) || (ay > 30 || ay < -30) || (az > 30 || az < -30)) && shakeEvent === false) {
                     shakeEvent = true
-                    alert('shaked')
+                    maze.visible = !maze.visible
+                    mazeBis.visible = !mazeBis.visible
 
                     setTimeout(function () {
                         shakeEvent = false
@@ -138,16 +140,23 @@ function initThree() {
         {
             maze = gltf.scene
             maze.scale.set(scaleMaze, scaleMaze, scaleMaze)
-            maze.position.y = .5
-            // maze.rotation.y = Math.PI / 2
+            maze.position.y = .45
             scene.add(maze)
+        }
+    )
 
-            // if(maze) {
-            // console.log('loaded')
-            // const result = threeToCannon(maze)
-            // const {rshape, roffset, rquaternion} = result
-            // world.addBody(result)
-            // }
+    // Load Maze Bis
+    let scaleMazeBis = .09
+    loader.load(
+        '/models/ballmazefirst.gltf',
+        (gltf) =>
+        {
+            mazeBis = gltf.scene
+            mazeBis.scale.set(scaleMazeBis, scaleMazeBis, scaleMazeBis)
+            // mazeBis.position.y = 0
+            mazeBis.visible = false
+            mazeBis.rotation.x = -(Math.PI / 2)
+            scene.add(mazeBis)
         }
     )
 
@@ -238,6 +247,16 @@ const updatePhysics = () => {
                 quaternionMazeNormalize.y,
                 quaternionMazeNormalize.z,
                 quaternionMazeNormalize.w
+            )
+        );
+    }
+    if (mazeBis) {
+        mazeBis.quaternion.copy(
+            new THREE.Quaternion(
+                quaternionFloorNormalize.x,
+                quaternionFloorNormalize.y,
+                quaternionFloorNormalize.z,
+                quaternionFloorNormalize.w
             )
         );
     }

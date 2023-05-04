@@ -29,6 +29,7 @@ function initMovement() {
     const gx = document.querySelector('.gx');
     const gy = document.querySelector('.gy');
     const gz = document.querySelector('.gz');
+    const ga = document.querySelector('.ga');
 
     if (window.DeviceMotionEvent) {
         window.addEventListener(

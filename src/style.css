@@ -17,15 +17,3 @@ body
     left: 0;
     outline: none;
 }
-
-.coord {
-    position: absolute;
-    z-index: 99;
-}
-
-.coord p {
-    color: white;
-    font-weight: 700;
-    /*position: absolute;*/
-    /*z-index: 99;*/
-}

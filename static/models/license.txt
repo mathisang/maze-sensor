@@ -1,0 +1,11 @@
+Model Information:
+* title:	Circular Maze
+* source:	https://sketchfab.com/3d-models/circular-maze-2add88a3d8a94dd591549d1a2ab0f6af
+* author:	Confused3D (https://sketchfab.com/Confused3D)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Circular Maze" (https://sketchfab.com/3d-models/circular-maze-2add88a3d8a94dd591549d1a2ab0f6af) by Confused3D (https://sketchfab.com/Confused3D) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

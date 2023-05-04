@@ -9,7 +9,6 @@ import {GUI} from 'dat.gui'
 
 import * as CANNON from 'cannon-es'
 import CannonDebugger from 'cannon-es-debugger'
-import { threeToCannon, ShapeType } from 'three-to-cannon';
 
 // Global variables
 let scene, renderer, canvas, sizes, moveX, moveY, maze, ball, floorBody, sphereBody, world, controls, camera,
@@ -21,13 +20,17 @@ initCannon()
 initThree()
 initDebugger()
 
+document.getElementById('shake').onclick = function () {
+    alert('shaked')
+}
+
 // Mouse & Mobile orientation
 function initMovement() {
     moveX = new DataPoint();
     moveY = new DataPoint();
 
+    // Shake detection
     let shakeEvent = false;
-
     if (window.DeviceMotionEvent) {
         window.addEventListener(
             "devicemotion",
@@ -42,7 +45,6 @@ function initMovement() {
 
                     setTimeout(function () {
                         shakeEvent = false
-                        alert('ready')
                     }, 3000);
                 }
             },
@@ -50,6 +52,7 @@ function initMovement() {
         );
     }
 
+    // Orientation detection
     if (window.DeviceOrientationEvent) {
         window.addEventListener(
             "deviceorientation",
@@ -60,6 +63,7 @@ function initMovement() {
             true
         );
     }
+    // Mouse detection
     else if (window.matchMedia('(hover: hover)').matches) {
         window.addEventListener('mousemove', (event) => {
             moveX.push((event.clientX / sizes.width) * 60 - 30);
@@ -198,10 +202,6 @@ function initCannon() {
         }
     )
     world.addContactMaterial(concretePlasticContactMaterial)
-}
-
-function initThreeToCannon() {
-
 }
 
 function initDebugger() {

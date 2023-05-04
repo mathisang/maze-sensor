@@ -1,4 +1,7 @@
-# Three.js Journey
+# Maze Sensor
+
+## Production
+Project available here : [Maze Sensor](https://maze-sensor.vercel.app/)
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).

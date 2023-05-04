@@ -22,6 +22,8 @@ body
     position: absolute;
     z-index: 99;
     right: 0;
+    color: white;
+    font-weight: 800;
 }
 
 button {

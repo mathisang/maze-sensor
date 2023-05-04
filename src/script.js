@@ -281,7 +281,13 @@ const updatePhysics = () => {
                 let derivate = 10.0 * (norm - oldData) / deltaTime;
                 oldData = norm
 
-                document.getElementById("test").innerText = derivate / 100000
+                let tempDerivate = derivate / 10000000
+
+                document.getElementById("test").innerText = tempDerivate
+
+                if(tempDerivate > 1000) {
+                    changeMaze()
+                }
 
                 // if((ax > 30 || ax < -30) || (ay > 30 || ay < -30) || (az > 30 || az < -30)) {
                 //     changeMaze()

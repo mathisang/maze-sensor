@@ -281,8 +281,6 @@ const updatePhysics = () => {
                 let derivate = 10.0 * (norm - oldData) / deltaTime;
                 oldData = norm
 
-                alert(derivate)
-
                 document.getElementById("test").innerText = derivate
 
                 // if((ax > 30 || ax < -30) || (ay > 30 || ay < -30) || (az > 30 || az < -30)) {
